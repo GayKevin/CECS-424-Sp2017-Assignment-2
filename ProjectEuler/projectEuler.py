@@ -1,10 +1,13 @@
+import math
+
+
 def is_prime(nbr):
-    if nbr == 2 or nbr == 3 or nbr == 5 or nbr == 7:
-        return True
-    elif nbr % 2 == 0 or nbr % 3 == 0 or nbr % 5 == 0 or nbr % 7 == 0:
+    if nbr < 2:
         return False
-    else:
-        return True
+    for i in range(2, int(math.sqrt(nbr)) + 1):
+        if nbr % i == 0:
+            return False
+    return True
 
 
 def sum_primes(nbr, total):
@@ -12,17 +15,24 @@ def sum_primes(nbr, total):
 
 
 def get_primes(nbr):
-    total = 0
-
-    while total < 2000000:
+    while True:
         if is_prime(nbr):
-            print(nbr)
-            total = sum_primes(nbr, total)
+            yield nbr
         nbr += 1
 
 
+def showprimes(nbr):
+    total = 0
+    primes = get_primes(nbr)
+
+    for x in primes:
+        if x >= 2000000:
+            return total
+        total = sum_primes(x, total)
+
+
 def main():
-    get_primes(70)
+    print(showprimes(0))
 
 
 if __name__ == "__main__":
