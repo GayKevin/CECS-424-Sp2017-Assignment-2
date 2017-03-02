@@ -29,12 +29,9 @@ def createTiret(coins, size, type, tiretposition):
         coins.append(a)
         coins.append(b)
     else:
-        if size == 0 or size == 1:
-            coins.insert(2, a)
-            coins.insert(3, b)
-        else:
-            coins.insert(0, a)
-            coins.insert(1, b)
+        tiretposition.insert(0, size)
+        coins.insert(size + 2, a)
+        coins.insert(size + 3, b)
 
 
 def checkTiret(coin, size):
@@ -44,8 +41,11 @@ def checkTiret(coin, size):
     return True
 
 
-def checkWin(coins):
+def checkWin(coins, tiretposition):
     coinCheck = ""
+
+    if 1 < tiretposition[0] < 8:
+        return False
 
     for coin in coins:
         if coin is not "-":
@@ -72,11 +72,11 @@ def swapList(coins, userInput, tiretposition):
         coins[size + 1] = tiret
         tiretposition.insert(0, size)
 
-    return checkWin(coins)
+    return checkWin(coins, tiretposition)
 
 
 def main():
-    coins = ["H", "T", "H", "T", "H", "T", "H", "T", "H", "T"]
+    coins = ["H", "H", "H", "H", "H", "T", "T", "T", "T", "T"]
     i = 0
     tiretposition = []
 
