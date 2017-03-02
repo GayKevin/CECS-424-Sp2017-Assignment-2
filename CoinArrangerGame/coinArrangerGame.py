@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 def firstRound(coins, tiretposition):
     coinInput = input()
     size = len(coinInput)
